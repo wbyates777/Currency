@@ -23,7 +23,7 @@
 
 
  
- 
+
 	Example 1
 
 	Currency ccy1(Currency::USD);
@@ -34,7 +34,7 @@
 
 	Currency ccy3("XYZ");
 	std::cout << ccy3 << std::endl;
- 
+
 	Currency ccy4(Currency::SVC);
 	std::cout << ccy4 << std::endl;	
 
@@ -47,26 +47,19 @@
 	exit(1);
 
 
-    Example 2
- 
-    Currency ccy;
-    int iters2 = 100000;
-    for (int i = 0; i < iters2; ++i)
-    {
-        for (int j = 1; j < Currency::NUMCURRENCY; ++j)
-        {
-            ccy.setCurrency( Currency::ccyIndex(j).toString() );
-        }
-        
-    }
-    for (int i = 0; i < iters2; ++i)
-    {
-        for (int j = 1; j < Currency::NUMCURRENCY; ++j)
-        {
-            ccy.setCurrency2( Currency::ccyIndex(j).toString() );
-        }
-    }
-    exit(1);
+	Example 2
+
+	Currency ccy;
+	int iters = 100000;
+	for (int i = 0; i < iters; ++i)
+	{
+			for (int j = 1; j < Currency::NUMCURRENCY; ++j)
+			{
+					ccy.setCurrency( Currency::ccyIndex(j).toString() );
+			}
+	}
+
+	exit(1);
 */
 
 #ifndef __CURRENCY_H__
@@ -125,8 +118,8 @@ public:
 	operator short( void ) const { return m_ccy; }
 
 	// The ISO 3 letter code for this currency i.e. "GBP"
-    std::string
-    toString( void ) const { return m_ccyNames[m_fromISO[m_ccy]]; }
+        std::string
+        toString( void ) const { return m_ccyNames[m_fromISO[m_ccy]]; }
 		
 	// i.e. s = "GBP"
 	bool
@@ -148,28 +141,25 @@ public:
 	static Currency
 	ccyIndex( const int i ) { return CurrencyCode(m_toISO[i]); }	
 
-    static int
+	static int
 	ccyIndex( const Currency c ) { return CurrencyCode(m_fromISO[c]); }
     
-    bool                
+	bool                
 	valid( void ) const { return m_ccy != NOCURRENCY; }
 	
 private:
 	
     // we use short here rather than enum deliberately as it simplifies streaming and Gazetteer
-	short m_ccy; 
+    short m_ccy; 
     
-	static Currency m_baseCurrency;
-	static const char * const m_ccyNames[NUMCURRENCY];
-	static const char * const m_denomNames[NUMCURRENCY];
-	static const short        m_toISO[NUMCURRENCY]; 
-	static const short        m_fromISO[MAXCURRENCY]; 
+    static Currency m_baseCurrency;
+    static const char * const m_ccyNames[NUMCURRENCY];
+    static const char * const m_denomNames[NUMCURRENCY];
+    static const short        m_toISO[NUMCURRENCY]; 
+    static const short        m_fromISO[MAXCURRENCY]; 
     static const short        m_searchPoints[27]; 
     static const short        m_midPoints[26]; 
 };
-
-
-
 
 
 std::ostream&
